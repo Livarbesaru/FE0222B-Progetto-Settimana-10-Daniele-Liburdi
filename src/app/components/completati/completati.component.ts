@@ -14,6 +14,7 @@ export class CompletatiComponent implements OnInit {
   taskcompleti!:number
   carica!:number
   tempo:number=1
+  controllo!:boolean
 
   constructor() {
     //la lista generica e dei completati nella componente completed viene eguagliata a quella nella service
@@ -36,12 +37,14 @@ export class CompletatiComponent implements OnInit {
   }
 
   rimozione(id:number){
+    this.controllo=true
     setTimeout(() => {
       //va a rimuovere l'oggetto dalla lista generica
       Service.rimuoviTaskCompletati(id).then((completo:Todo[])=>{
         //la lista nella componente dei completati viene eguagliata a quella generica nel service
         this.lista=completo
       })
+      this.controllo=false
     }, 2000);
   }
 

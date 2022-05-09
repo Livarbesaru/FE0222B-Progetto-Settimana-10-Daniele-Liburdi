@@ -13,7 +13,7 @@
       <tr *ngFor="let item of lista">
           <th *ngIf="item.completed==true">
               <i>--Completato--</i> <span class="text-success">{{item.title}}</span>
-              <button class="btn btn-danger" id='{{item.id}}' (click)="rimozione(item.id)">X</button>
+              <button class="btn btn-danger" id='{{item.id}}' (click)="rimozione(item.id)" [disabled]="controllo">X</button>
           </th>
       </tr>
     </table>
