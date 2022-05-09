@@ -4,7 +4,9 @@
   <div class="navbar" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item px-1">
-        <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ToDo</a>
+        <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ToDo
+          <span class="border rounded-circle p-1 py-0">{{listaNoncompletati?.length}}</span>
+        </a>
       </li>
       <li class="nav-item px-1 ">
         <a [routerLink]="['/completati']" routerLinkActive="active">Completati

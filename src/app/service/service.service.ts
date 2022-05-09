@@ -8,6 +8,8 @@ let ids:number
 //valore utilizzato per identificazione dei singoli oggetti
 let listacompletati:Todo[]=[]
 //lista delle sole task completate
+let listaNonCompletati:Todo[]=[]
+//lista delle sole task non completate
 
 //controllo degli oggetti nella lista task generica
 export async function control(){
@@ -36,6 +38,8 @@ export async function annotazione(oggettoToDo:string){
   return await (new Promise<Todo[]>(()=>{
     //l'oggetto(task) creato viene inserito nella lista generica
     lista.push({id:ids,title:oggettoToDo,completed:false})
+    //l'oggetto(task) creato viene inserito nella lista non completati
+    listaNonCompletati.push({id:ids,title:oggettoToDo,completed:false})
     return lista
   }))
 }
@@ -45,8 +49,12 @@ export async function completa(index:number) {
     return await (new Promise<Todo[]>(()=>{
       //identificazione dell'indice dell'oggetto nella lista generica
       let numero =lista.findIndex(x => x.id == index)
+      //identificazione dell'indice dell'oggetto nella lista non completati
+      let numeroNon=listaNonCompletati.findIndex(x => x.id == index)
       //successiva alterazione del valore nell'attributo
       lista[numero].completed=true
+      //la task completata, viene rimossa dai task non completati
+      listaNonCompletati.splice(numeroNon,1)
       //aggiunto alla lista dei completati
       listacompletati.push(lista[numero])
       //gli oggetti ven
@@ -60,5 +68,43 @@ export async function prendiCompleti() {
     setTimeout(()=>{
       res(listacompletati)
     },2000)
+  }))
+}
+
+//funzione usata per inviare la lista delle task non completate per calcolo numerico e stampa del valore nella navbar
+export async function getNonCompleati() {
+  return await (new Promise<Todo[]>((res)=>{
+    setTimeout(()=>{
+      res(listaNonCompletati)
+    },2000)
+  }))
+}
+//rimozione del task completato
+export async function rimuoviTaskCompletati(index:number) {
+  return await (new Promise<Todo[]>(()=>{
+    //identificazione dell'indice dell'oggetto nella lista generica
+    let numero =lista.findIndex(x => x.id == index)
+    //la task completata, viene rimossa dalla lista generica
+    lista.splice(numero,1)
+    //identificazione dell'indice dell'oggetto nella lista completati
+    let numeroCom =listacompletati.findIndex(x => x.id == index)
+    //la task completata, viene rimossa dai task completati
+    listacompletati.splice(numeroCom,1)
+
+    return lista
+  }))
+}
+export async function rimuoviTaskNonCompletati(index:number) {
+  return await (new Promise<Todo[]>(()=>{
+    //identificazione dell'indice dell'oggetto nella lista generica
+    let numero =lista.findIndex(x => x.id == index)
+    //la task non completata, viene rimossa dalla lista generica
+    lista.splice(numero,1)
+    //identificazione dell'indice dell'oggetto nella lista non completati
+    let numeroCom =listacompletati.findIndex(x => x.id == index)
+    //la task non completata, viene rimossa dai task non completati
+    listaNonCompletati.splice(numeroCom,1)
+
+    return lista
   }))
 }

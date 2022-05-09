@@ -12,14 +12,19 @@ import { TodoComponent } from '../todo/todo.component';
 export class NavbarComponent implements OnInit {
   lista!: Todo[];
   listacompletati!: Todo[];
+  listaNoncompletati!:Todo[]
   constructor() {
     //la lista nella componente navbar viene eguagliata a quella nella service
     Service.stampa().then((lista) => {
       this.lista = lista;
     });
-    //la lista
+    //la lista dei completati nella componente navbar viene eguagliata a quella nella service
     Service.prendiCompleti().then((listaTask) =>{
       this.listacompletati=listaTask
+    })
+    //la lista dei non completati nella componente navbar viene eguagliata a quella nella service
+    Service.getNonCompleati().then((listaNon)=>{
+      this.listaNoncompletati=listaNon
     })
   }
   ngOnInit(): void {}

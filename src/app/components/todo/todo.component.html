@@ -18,6 +18,7 @@
         <th *ngIf="item.completed==false" class="p-1">
           <i>--Da fare--</i> <span class="text-danger">{{item.title}}</span>
           <button class="btn btn-success" id='{{item.id}}' (click)="completaTask(item.id)">&#10003;</button>
+          <button class="btn btn-danger" id='{{item.id}}' (click)="rimozione(item.id)">X</button>
         </th>
       </tr>
     </table>
