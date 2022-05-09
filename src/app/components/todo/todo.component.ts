@@ -72,21 +72,25 @@ export class TodoComponent implements OnInit {
   }
   //cambia il valore della task da non completata a completata
   completaTask(id:number){
+    this.controllo=true
     setTimeout(() => {
       //va ad alterarsi lo stato di completamento dell'oggetto nella lista generica nel service con id corrispettivo a quello nella ToDo
       Service.completa(id).then((completo:Todo[])=>{
         //la lista nella ToDo viene eguagliata a quella generica nel service
         this.lista=completo
       })
+      this.controllo=false
     }, 2000);
   }
   rimozione(id:number){
+    this.controllo=true
     setTimeout(() => {
       //va a rimuovere l'oggetto dalla lista generica
       Service.rimuoviTaskNonCompletati(id).then((completo:Todo[])=>{
         //la lista nella componente dei completati viene eguagliata a quella generica nel service
         this.lista=completo
       })
+      this.controllo=false
     }, 2000);
   }
   ngOnInit(): void {

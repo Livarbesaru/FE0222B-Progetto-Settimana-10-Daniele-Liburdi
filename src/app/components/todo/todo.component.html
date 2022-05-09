@@ -17,8 +17,8 @@
       <tr *ngFor="let item of lista" class="border rounded-pill">
         <th *ngIf="item.completed==false" class="p-1">
           <i>--Da fare--</i> <span class="text-danger">{{item.title}}</span>
-          <button class="btn btn-success" id='{{item.id}}' (click)="completaTask(item.id)">&#10003;</button>
-          <button class="btn btn-danger" id='{{item.id}}' (click)="rimozione(item.id)">X</button>
+          <button class="btn btn-success" id='{{item.id}}' (click)="completaTask(item.id)" [disabled]="controllo">&#10003;</button>
+          <button class="btn btn-danger" id='{{item.id}}' (click)="rimozione(item.id)" [disabled]="controllo">X</button>
         </th>
       </tr>
     </table>
